@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenta Shimizu – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0d0d; --bg2: #141414; --bg3: #1c1c1c;
+    --accent: #c8f55a; --accent2: #a8d93e;
+    --text: #f0ece3; --muted: #888880;
+    --border: rgba(255,255,255,0.08); --card-bg: #181818;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; font-weight: 300; }
+  .display { font-family: 'Syne', sans-serif; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(13,13,13,0.85); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.05em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--accent); color: #0d0d0d; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; padding: 0.5rem 1.2rem; border-radius: 100px; text-decoration: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--accent2); }
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,245,90,0.07) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { max-width: 900px; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(200,245,90,0.1); border: 0.5px solid rgba(200,245,90,0.3); color: var(--accent); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; padding: 0.35rem 0.9rem; border-radius: 100px; margin-bottom: 2rem; }
+  .hero-tag::before { content: '●'; font-size: 8px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  h1 .accent-line { color: var(--accent); }
+  .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 540px; margin-bottom: 2.5rem; line-height: 1.8; font-weight: 300; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--accent); color: #0d0d0d; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.05em; padding: 0.85rem 2rem; border-radius: 100px; text-decoration: none; transition: transform 0.2s, background 0.2s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--accent2); }
+  .btn-outline { border: 0.5px solid rgba(255,255,255,0.2); color: var(--text); font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.05em; padding: 0.85rem 2rem; border-radius: 100px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: inline-block; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 0.5px solid var(--border); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-top: 0.3rem; }
+  section { padding: 6rem 3rem; }
+  .section-tag { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 1rem; }
+  h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3rem; line-height: 1.1; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .skill-item { background: var(--card-bg); padding: 1.8rem; transition: background 0.2s; }
+  .skill-item:hover { background: #202020; }
+  .skill-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .skill-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; }
+  .skill-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .works-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .work-item { background: var(--card-bg); padding: 2rem 2.5rem; display: grid; grid-template-columns: auto 1fr auto; gap: 2rem; align-items: center; transition: background 0.2s; }
+  .work-item:hover { background: #202020; }
+  .work-num { font-family: 'Syne', sans-serif; font-size: 11px; color: var(--muted); font-weight: 600; }
+  .work-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+  .work-sub { font-size: 12px; color: var(--muted); }
+  .work-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+  .tag { background: rgba(200,245,90,0.08); border: 0.5px solid rgba(200,245,90,0.2); color: var(--accent); font-size: 10px; font-weight: 500; letter-spacing: 0.05em; padding: 0.2rem 0.6rem; border-radius: 100px; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; line-height: 1.9; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-items { display: flex; flex-direction: column; gap: 1rem; }
+  .about-item { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+  .about-item-icon { color: var(--accent); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .about-item-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .about-item-desc { font-size: 12px; color: var(--muted); }
+  .profile-box { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 16px; padding: 2.5rem; margin-top: 2rem; position: relative; overflow: hidden; }
+  .profile-box::before { content: '"'; position: absolute; top: -0.5rem; left: 1.5rem; font-family: 'Syne', sans-serif; font-size: 8rem; color: rgba(200,245,90,0.1); line-height: 1; pointer-events: none; }
+  .profile-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 1rem; }
+  .profile-text { color: var(--muted); line-height: 2.0; font-size: 0.95rem; position: relative; z-index: 1; }
+  .contact-inner { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 20px; padding: 4rem; text-align: center; position: relative; overflow: hidden; }
+  .contact-inner::before { content: ''; position: absolute; bottom: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(200,245,90,0.06) 0%, transparent 70%); pointer-events: none; }
+  .contact-inner h2 { margin-bottom: 1rem; }
+  .contact-inner p { color: var(--muted); max-width: 400px; margin: 0 auto 2.5rem; }
+  .contact-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  footer { padding: 2rem 3rem; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; } .hero { padding: 7rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .work-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .work-tags { justify-content: flex-start; }
+    .hero-stats { gap: 2rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo display">KS / Portfolio</div>
+  <div class="nav-links">
+    <a href="#skills">スキル</a>
+    <a href="#works">実績</a>
+    <a href="#about">について</a>
+    <a href="#contact">お問い合わせ</a>
+  </div>
+  <a href="https://crowdworks.jp/public/employers/5469694" class="nav-cta" target="_blank">CrowdWorks ↗</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">広島・福山 / フルリモート対応</div>
+    <h1>AI × 事業を<br><span class="accent-line">動かす人。</span></h1>
+    <p class="hero-desc">飲食・音楽・コンテンツ事業を自ら運営しながら、AI自動化・LINE Bot・システム開発を実装してきたコミュニティデザインプロデューサー。「作れる」だけでなく「事業として回せる」視点で動きます。</p>
+    <div class="hero-btns">
+      <a href="#works" class="btn-primary">実績を見る</a>
+      <a href="#contact" class="btn-outline">お問い合わせ</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">6+</div><div class="stat-label">自動化システム構築</div></div>
+      <div><div class="stat-num">4</div><div class="stat-label">運営業態数</div></div>
+      <div><div class="stat-num">3</div><div class="stat-label">外部クライアント実績</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-tag">SKILLS</div>
+  <h2>できること</h2>
+  <div class="skills-grid">
+    <div class="skill-item"><div class="skill-icon">🤖</div><div class="skill-name">AI自動化</div><div class="skill-desc">Claude API / LINE Bot / GAS を組み合わせたエージェントシステム構築</div></div>
+    <div class="skill-item"><div class="skill-icon">⚙️</div><div class="skill-name">システム開発</div><div class="skill-desc">GAS / Node.js / Python / Puppeteer / Flask で業務自動化を実装</div></div>
+    <div class="skill-item"><div class="skill-icon">📱</div><div class="skill-name">SNS自動化</div><div class="skill-desc">Instagram Graph API / X API を使った自動投稿システム構築</div></div>
+    <div class="skill-item"><div class="skill-icon">🎨</div><div class="skill-name">Webデザイン</div><div class="skill-desc">HTML / CSS / React でのUI制作・LP・ポートフォリオ</div></div>
+    <div class="skill-item"><div class="skill-icon">✍️</div><div class="skill-name">ライティング</div><div class="skill-desc">SNSコピー・ブログ・ブローシャー・事業計画書まで対応</div></div>
+    <div class="skill-item"><div class="skill-icon">📊</div><div class="skill-name">事業コンサル</div><div class="skill-desc">飲食・音楽・マーケティング領域での戦略立案と実行支援</div></div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="section-tag">WORKS</div>
+  <h2>主な実績</h2>
+  <div class="works-list">
+    <div class="work-item">
+      <div class="work-num">01</div>
+      <div><div class="work-title">AI自動化基盤（company-os）構築</div><div class="work-sub">Co-Nook — GAS × Claude API × Slack × LINE によるエージェントシステム</div></div>
+      <div class="work-tags"><span class="tag">GAS</span><span class="tag">Claude API</span><span class="tag">Slack</span><span class="tag">LINE</span></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">02</div>
+      <div><div class="work-title">Instagram / X 自動投稿システム</div><div class="work-sub">複数クライアント — 投稿生成〜スケジュール〜通知まで全自動化</div></div>
+      <div class="work-tags"><span class="tag">Instagram API</span><span class="tag">X API</span><span class="tag">GAS</span></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">03</div>
+      <div><div class="work-title">LINE Bot × スタッフ管理システム</div><div class="work-sub">Co-Nook — Flask × Claude API × Google Sheets でプロフィール自動生成</div></div>
+      <div class="work-tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">LINE</span><span class="tag">Render</span></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">04</div>
+      <div><div class="work-title">FAQ Bot × Webオートメーション</div><div class="work-sub">婚活クライアント（匿名） — Notion連携FAQ・シフト自動入力システム</div></div>
+      <div class="work-tags"><span class="tag">Puppeteer</span><span class="tag">Node.js</span><span class="tag">Notion</span></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">05</div>
+      <div><div class="work-title">音楽レーベル立ち上げ・運営</div><div class="work-sub">Feel Fine Records — コンテンツ制作・アーティスト育成・リリース</div></div>
+      <div class="work-tags"><span class="tag">コンテンツ制作</span><span class="tag">ブランディング</span></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">06</div>
+      <div><div class="work-title">飲食事業コンサル × P&L管理</div><div class="work-sub">Sora / Umi — 事業計画書作成・収支管理システム・HotPepper最適化</div></div>
+      <div class="work-tags"><span class="tag">コンサル</span><span class="tag">Excel</span><span class="tag">事業計画</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-tag">ABOUT</div>
+  <h2>清水健太について</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>広島県福山市を拠点に、<strong>野菜ダイニングバー「Sora」・野菜カフェ「Umi」・音楽レーベル「Feel Fine Records」・コンテンツ制作「MICO」</strong>を運営するCo-Nookのコミュニティデザインプロデューサーです。</p>
+      <p>自社事業を動かしながら、AI自動化・LINE Bot・SNS自動投稿・事業コンサルを実装してきました。「コードを書ける人」ではなく<strong>「事業として回せる人」</strong>として、戦略から実装まで一気通貫で対応できます。</p>
+      <p>スピード重視・低コスト重視。詰まったら即別ルートを探すスタイルで動きます。フルリモート完全対応。</p>
+      <div class="profile-box">
+        <div class="profile-label">CROWDWORKS プロフィール文（コピー用）</div>
+        <div class="profile-text">
+          広島・福山を拠点に、飲食・音楽・コンテンツ事業を運営しながら、AI自動化システムの設計・実装を手がけてきました。GAS × Claude API × LINE Bot × Instagram自動投稿など、ゼロから構築した実績が多数あります。<br><br>
+          「作れる人」ではなく「事業として動かせる人」として、システム開発からコンサルまで一気通貫で対応できます。スピード重視・低コスト重視で動きます。フルリモート完全対応 / 小〜中規模案件歓迎。
+        </div>
+      </div>
+    </div>
+    <div class="about-items">
+      <div class="about-item"><div class="about-item-icon">📍</div><div><div class="about-item-title">拠点 / 対応エリア</div><div class="about-item-desc">広島県福山市 / フルリモート完全対応</div></div></div>
+      <div class="about-item"><div class="about-item-icon">⚡</div><div><div class="about-item-title">得意な案件</div><div class="about-item-desc">AI自動化・LINE Bot・GAS・SNS自動投稿・Webデザイン・事業コンサル・コンテンツ制作</div></div></div>
+      <div class="about-item"><div class="about-item-icon">🚫</div><div><div class="about-item-title">対応できない案件</div><div class="about-item-desc">出社必須・テレアポ・単純データ入力</div></div></div>
+      <div class="about-item"><div class="about-item-icon">💰</div><div><div class="about-item-title">参考単価</div><div class="about-item-desc">AI・システム開発：固定3万〜 / 時給3,000〜<br>コンサル：固定5万〜 / 時給5,000〜<br>Webデザイン：固定2万〜<br>ライティング：固定1.5万〜</div></div></div>
+      <div class="about-item"><div class="about-item-icon">🎯</div><div><div class="about-item-title">スタイル</div><div class="about-item-desc">結論ファースト。完璧より速度優先。詰まったら即別ルートを探す。</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-tag">CONTACT</div>
+    <h2>一緒に動きましょう</h2>
+    <p>まずは気軽にメッセージください。案件の規模・予算・期間、なんでも相談OKです。</p>
+    <div class="contact-btns">
+      <a href="https://crowdworks.jp/public/employers/5469694" class="btn-primary" target="_blank">CrowdWorksで連絡する ↗</a>
+      <a href="https://tech.crowdworks.jp" class="btn-outline" target="_blank">CW テックを見る ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Kenta Shimizu / Co-Nook</div>
+  <div>Fukuyama, Hiroshima — Remote OK</div>
+</footer>
+</body>
+</html>
